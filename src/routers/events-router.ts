@@ -1,13 +1,9 @@
 import { Router } from "express";
-import { getDefaultEvent,  getTicketsTypes, getTicket } from "@/controllers";
-import { authenticateToken, validateBody } from "@/middlewares";
+import { getDefaultEvent } from "@/controllers";
 
 const eventsRouter = Router();
 
 eventsRouter
-  .get("/", getDefaultEvent)
-  .all("/*", authenticateToken)
-  .get("/tickets/types", getTicketsTypes)
-  .get("/tickets", getTicket);
+  .get("/", getDefaultEvent);
 
 export { eventsRouter };

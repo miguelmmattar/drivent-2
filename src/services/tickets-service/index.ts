@@ -4,7 +4,7 @@ import { TicketType, Ticket } from "@prisma/client";
 
 async function getTicketsTypes(): Promise<TicketType[]> {
   const types = await ticketsRepository.findTicketsTypes();
-
+  console.log(types);
   return types;
 }
 

@@ -10,7 +10,7 @@ export async function getTicketsTypes(req: Request, res: Response) {
 
     return res.status(httpStatus.OK).send(ticketsTypes);
   } catch (error) {
-    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    return res.sendStatus(httpStatus.NO_CONTENT);
   }
 }
 
@@ -24,7 +24,7 @@ export async function getTicket(req: AuthenticatedRequest, res: Response) {
 
     return res.status(httpStatus.OK).send(ticket);
   } catch (error) {
-    console.log(error);
+    if(error.name === "NotFoundError") return res.sendStatus(httpStatus.NOT_FOUND);
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
@@ -39,6 +39,8 @@ export async function postTicket(req: AuthenticatedRequest, res: Response) {
 
     return res.status(httpStatus.CREATED).send(ticket);
   } catch (error) {
+    if (error.name === "invalidDataError") return res.send(httpStatus.BAD_REQUEST);
+    if (error.name === "NotFoundError") return res.send(httpStatus.NOT_FOUND);
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }

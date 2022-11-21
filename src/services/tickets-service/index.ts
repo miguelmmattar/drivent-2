@@ -11,13 +11,13 @@ async function getTicketsTypes(): Promise<TicketType[]> {
 async function getTicket(enrollmentId: number): Promise<Ticket> {
   const ticket = await ticketsRepository.findTicket(enrollmentId);
 
-  if(!ticket) throw notFoundError();
+  if(!ticket) throw notFoundError(); 
 
   return ticket;
 }
 
 async function getTicketById(ticketId: number): Promise<Ticket> {
-  if(!ticketId) throw invalidDataError(["No ticketId"]);
+  if(!ticketId) throw invalidDataError;
   
   const ticket = await ticketsRepository.findTicketById(ticketId);
 
@@ -27,7 +27,7 @@ async function getTicketById(ticketId: number): Promise<Ticket> {
 }
 
 async function postTicket(enrollmentId: number, ticketTypeId: number): Promise<Ticket> {
-  if(!ticketTypeId) throw invalidDataError(["No ticketTypeId"]);
+  if(!ticketTypeId) throw invalidDataError;
 
   return await ticketsRepository.createTicket(ticketTypeId, enrollmentId);
 }

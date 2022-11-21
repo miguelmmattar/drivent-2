@@ -15,11 +15,11 @@ async function getPayment(enrollmentId: number, ticket: Ticket): Promise<Payment
 }
 
 async function postPayment(enrollmentId: number, ticketId: number, cardData: CardData, ticket: Ticket ): Promise<Payment> {
-  if(!ticketId) throw invalidDataError(["No ticketId"]);
-  if(!cardData) throw invalidDataError(["No cardData"]);
+  if(!ticketId) throw invalidDataError;
+  if(!cardData) throw invalidDataError;
   if(ticket.enrollmentId !== enrollmentId) throw unauthorizedError();
 
-  await ticketsRepository.upateTicket(ticketId);
+  await ticketsRepository.updateTicket(ticketId);
 
   return await paymentsRepository.createPayment(ticket, cardData);
 }

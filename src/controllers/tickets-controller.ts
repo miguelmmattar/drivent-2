@@ -24,6 +24,7 @@ export async function getTicket(req: AuthenticatedRequest, res: Response) {
 
     return res.status(httpStatus.OK).send(ticket);
   } catch (error) {
+    console.log(error);
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }

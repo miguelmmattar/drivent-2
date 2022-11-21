@@ -8,6 +8,9 @@ async function findTicket(enrollmentId: number) {
   return prisma.ticket.findFirst({
     where: {
       enrollmentId
+    },
+    include: {
+      TicketType: true
     }
   });
 }
